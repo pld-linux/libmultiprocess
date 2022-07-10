@@ -1,0 +1,42 @@
+--- libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/CMakeLists.txt.orig	2022-01-07 22:43:07.000000000 +0100
++++ libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/CMakeLists.txt	2022-07-10 19:00:38.735208820 +0200
+@@ -52,7 +52,7 @@ set(MP_PUBLIC_HEADERS
+   include/mp/proxy.h
+   include/mp/util.h)
+ 
+-add_library(multiprocess STATIC
++add_library(multiprocess
+   ${MP_PROXY_SRCS}
+   ${MP_PUBLIC_HEADERS}
+   src/mp/proxy.cpp
+@@ -67,11 +67,11 @@ target_link_libraries(multiprocess PRIVA
+ target_link_libraries(multiprocess PRIVATE CapnProto::capnp-rpc)
+ target_link_libraries(multiprocess PRIVATE CapnProto::kj)
+ target_link_libraries(multiprocess PRIVATE CapnProto::kj-async)
+-set_target_properties(multiprocess PROPERTIES
++set_target_properties(multiprocess PROPERTIES VERSION 0.0 SOVERSION 0
+     PUBLIC_HEADER "${MP_PUBLIC_HEADERS}"
+     CXX_STANDARD 17
+     CXX_STANDARD_REQUIRED YES)
+-install(TARGETS multiprocess EXPORT Multiprocess ARCHIVE DESTINATION lib PUBLIC_HEADER DESTINATION include/mp)
++install(TARGETS multiprocess EXPORT Multiprocess ARCHIVE DESTINATION lib${LIB_SUFFIX} PUBLIC_HEADER DESTINATION include/mp)
+ 
+ add_executable(mpgen src/mp/gen.cpp)
+ target_include_directories(mpgen PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
+--- libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/pkgconfig/libmultiprocess.pc.in.orig	2022-07-10 18:55:55.196744879 +0200
++++ libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/pkgconfig/libmultiprocess.pc.in	2022-07-10 19:01:14.718347216 +0200
+@@ -1,6 +1,6 @@
+ prefix=@CMAKE_INSTALL_PREFIX@
+ exec_prefix=${prefix}
+-libdir=${prefix}/lib
++libdir=${prefix}/@CMAKE_INSTALL_LIBDIR@
+ includedir=${prefix}/include
+ capnp_prefix=@capnp_PREFIX@
+ 
+@@ -8,5 +8,5 @@ Name: libmultiprocess
+ Description: Multiprocess IPC library
+ Version: 0.0
+ 
+-Libs: -L${libdir} -lmultiprocess -L${capnp_prefix}/lib -lcapnp-rpc -lcapnp -lkj-async -lkj -pthread -lpthread
++Libs: -L${libdir} -lmultiprocess -lcapnp-rpc -lcapnp -lkj-async -lkj -pthread -lpthread
+ Cflags: -std=c++17 -I${includedir} -I${capnp_prefix}/include -pthread
