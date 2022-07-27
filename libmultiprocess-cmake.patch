@@ -23,6 +23,19 @@
  
  add_executable(mpgen src/mp/gen.cpp)
  target_include_directories(mpgen PRIVATE $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>)
+@@ -90,10 +90,10 @@ install(TARGETS mpgen EXPORT Multiproces
+ 
+ configure_file(include/mp/config.h.in "${CMAKE_CURRENT_BINARY_DIR}/include/mp/config.h")
+ configure_file(pkgconfig/libmultiprocess.pc.in "${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/libmultiprocess.pc" @ONLY)
+-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/libmultiprocess.pc" DESTINATION "lib/pkgconfig")
++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/pkgconfig/libmultiprocess.pc" DESTINATION "lib${LIB_SUFFIX}/pkgconfig")
+ install(FILES "include/mpgen.mk" DESTINATION "include")
+ 
+-install(EXPORT Multiprocess DESTINATION lib/cmake/Multiprocess)
++install(EXPORT Multiprocess DESTINATION lib${LIB_SUFFIX}/cmake/Multiprocess)
+ 
+ add_subdirectory(example EXCLUDE_FROM_ALL)
+ add_subdirectory(test EXCLUDE_FROM_ALL)
 --- libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/pkgconfig/libmultiprocess.pc.in.orig	2022-07-10 18:55:55.196744879 +0200
 +++ libmultiprocess-9f4dac644acfd79e532a7da54b5e1363d555a5cc/pkgconfig/libmultiprocess.pc.in	2022-07-10 19:01:14.718347216 +0200
 @@ -1,6 +1,6 @@
