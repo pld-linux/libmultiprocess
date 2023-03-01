@@ -8,7 +8,8 @@ Name:		libmultiprocess
 Version:	0
 %define	gitref	9f4dac644acfd79e532a7da54b5e1363d555a5cc
 %define	snap	20220110
-Release:	0.%{snap}.1
+%define	rel	2
+Release:	0.%{snap}.%{rel}
 License:	MIT
 Group:		Libraries
 #Source0Download: https://github.com/chaincodelabs/libmultiprocess/releases
