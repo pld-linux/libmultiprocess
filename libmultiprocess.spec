@@ -8,7 +8,7 @@ Name:		libmultiprocess
 Version:	0
 %define	gitref	9f4dac644acfd79e532a7da54b5e1363d555a5cc
 %define	snap	20220110
-%define	rel	3
+%define	rel	4
 Release:	0.%{snap}.%{rel}
 License:	MIT
 Group:		Libraries
