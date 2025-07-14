@@ -46,7 +46,7 @@ Pliki nagłówkowe biblioteki libmultiprocess.
 
 %prep
 %setup -q -n %{name}-%{gitref}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 install -d build
